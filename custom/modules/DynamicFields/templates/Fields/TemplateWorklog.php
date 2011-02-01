@@ -1,5 +1,6 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+
 /*********************************************************************************
  * The contents of this file are subject to the SugarCRM Enterprise Subscription
  * Agreement ("License") which can be viewed at
@@ -28,8 +29,70 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  ********************************************************************************/
 
 require_once('modules/DynamicFields/templates/Fields/TemplateTextArea.php');
-class TemplateWorklog extends TemplateTextArea{
-	var $type = 'worklog';
-    var $len = '';
+class TemplateWorklog extends TemplateTextArea
+{
+    var $type = 'Worklog';
+
+    function __construct()
+    {
+        $this->vardef_map['rows'] = 'ext2';
+        $this->vardef_map['cols'] = 'ext3';
+    }
+
+    function get_db_type()
+    {
+        if ($GLOBALS['db']->dbType == 'oci8') {
+            return "CLOB";
+        } else if (!empty($GLOBALS['db']->isFreeTDS)) {
+            return "NTEXT";
+        } else {
+            return "TEXT";
+        }
+    }
+
+    function set($values)
+    {
+        parent::set($values);
+        if (!empty($this->ext2)) {
+            $this->rows = $this->ext2;
+        }
+        if (!empty($this->ext3)) {
+            $this->cols = $this->ext3;
+        }
+        if (!empty($this->ext4)) {
+            $this->default_value = $this->ext4;
+        }
+
+    }
+
+    function get_xtpl_detail()
+    {
+        $name = $this->name;
+        return nl2br($this->bean->$name);
+    }
+
+    function get_field_def()
+    {
+        $def = parent::get_field_def();
+
+        $def['studio'] = 'visible';
+        $def['type'] = $this->get_db_type();
+
+        if (isset ($this->ext2) && isset ($this->ext3)) {
+            $def['rows'] = $this->ext2;
+            $def['cols'] = $this->ext3;
+        }
+        if (isset($this->rows) && isset ($this->cols)) {
+            $def['rows'] = $this->rows;
+            $def['cols'] = $this->cols;
+        }
+        return $def;
+    }
+
+    function get_db_default()
+    {
+        // TEXT columns in MySQL cannot have a DEFAULT value - let the Bean handle it on save
+        return null; // Bug 16612 - null so that the get_db_default() routine in TemplateField doesn't try to set DEFAULT
+    }
 }
 

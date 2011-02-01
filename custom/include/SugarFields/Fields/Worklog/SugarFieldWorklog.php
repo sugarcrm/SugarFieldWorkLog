@@ -27,11 +27,12 @@ class SugarFieldWorklog extends SugarFieldText
         $t = $sugar_config['default_time_format'];
         $log_date = date("$d \a\\t $t", time());
 
-        if (!empty($bean->$field)) {
-            $msg = PHP_EOL . PHP_EOL;
+        $msg = $bean->$field;
+        if (!empty($msg)) {
+            $msg .= PHP_EOL . PHP_EOL;
         }
         $msg .= "<b>" . $current_user->name . " on " . $log_date . "</b>" . PHP_EOL . $params[$field . '_worklog'];
 
-        $bean->$field = $msg;
+        $bean->$field = trim($msg);
     }
 }

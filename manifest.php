@@ -62,7 +62,7 @@ $manifest = array(
 	'description'		=> 'A Custom Worklog Field',
 	'author' 		=> 'Jon Whitcraft',
 	'published_date'	=> '1/31/2011',
-	'version' 		=> '0.5',
+	'version' 		=> '0.7',
 	'type' 			=> 'module',
 	'is_uninstallable'	=> true,
 );
