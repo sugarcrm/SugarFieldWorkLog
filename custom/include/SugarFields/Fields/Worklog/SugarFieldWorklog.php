@@ -6,21 +6,32 @@
  * Time: 9:59 PM
  * To change this template use File | Settings | File Templates.
  */
- 
-require_once('include/SugarFields/Fields/Base/SugarFieldBase.php');
-require_once('custom/include/SugarFields/Fields/Maskedinput/SugarFieldMaskedinputjs.php');
 
-class SugarFieldWorklog extends SugarFieldTextarea {
-    
-    function getEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex){
-    	//This only runs when the cached TPL file is created
-        $this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);;
+require_once('include/SugarFields/Fields/Text/SugarFieldText.php');
+
+class SugarFieldWorklog extends SugarFieldText
+{
+
+    function getEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex)
+    {
+        //This only runs when the cached TPL file is created
+        $this->setup($parentFieldArray, $vardef, $displayParams, $tabindex);
         return $this->fetch('custom/include/SugarFields/Fields/Worklog/EditView.tpl');
     }
 
-	public function save(&$bean, $params, $field, $properties, $prefix = '') {
-		//This is run whenever this custom field is being saved from an editview
-		//Here you would include any pre-save processing that needs to be done
-        $bean->$field['name'] = $_POST[$field['name']] . '_worklog';
-	}
+    public function save(&$bean, $params, $field, $properties, $prefix = '')
+    {
+        global $current_user, $timedate, $sugar_config;
+
+        $d = $sugar_config['default_date_format'];
+        $t = $sugar_config['default_time_format'];
+        $log_date = date("$d \a\\t $t", time());
+
+        if (!empty($bean->$field)) {
+            $msg = PHP_EOL . PHP_EOL;
+        }
+        $msg .= "<b>" . $current_user->name . " on " . $log_date . "</b>" . PHP_EOL . $params[$field . '_worklog'];
+
+        $bean->$field = $msg;
+    }
 }
