@@ -10,7 +10,7 @@
 require_once('include/SugarFields/Fields/Base/SugarFieldBase.php');
 require_once('custom/include/SugarFields/Fields/Maskedinput/SugarFieldMaskedinputjs.php');
 
-class SugarFieldWorklog extends SugarFieldText {
+class SugarFieldWorklog extends SugarFieldTextarea {
     
     function getEditViewSmarty($parentFieldArray, $vardef, $displayParams, $tabindex){
     	//This only runs when the cached TPL file is created
@@ -21,5 +21,6 @@ class SugarFieldWorklog extends SugarFieldText {
 	public function save(&$bean, $params, $field, $properties, $prefix = '') {
 		//This is run whenever this custom field is being saved from an editview
 		//Here you would include any pre-save processing that needs to be done
+        $bean->$field['name'] = $_POST[$field['name']] . '_worklog';
 	}
 }
