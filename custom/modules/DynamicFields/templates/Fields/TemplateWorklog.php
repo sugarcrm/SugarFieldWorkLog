@@ -76,7 +76,8 @@ class TemplateWorklog extends TemplateTextArea
         $def = parent::get_field_def();
 
         $def['studio'] = 'visible';
-        $def['type'] = $this->get_db_type();
+        $def['type'] = 'worklog';
+        $def['dbType'] = $this->get_db_type();
 
         if (isset ($this->ext2) && isset ($this->ext3)) {
             $def['rows'] = $this->ext2;
