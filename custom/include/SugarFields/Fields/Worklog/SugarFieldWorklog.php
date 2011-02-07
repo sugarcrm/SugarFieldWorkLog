@@ -21,6 +21,9 @@ class SugarFieldWorklog extends SugarFieldText
 
     public function save(&$bean, $params, $field, $properties, $prefix = '')
     {
+        // we don't need to do anything as the worklog is empty
+        if(empty($params[$field . '_worklog'])) return;
+
         global $current_user, $timedate, $sugar_config;
 
         $d = $sugar_config['default_date_format'];
