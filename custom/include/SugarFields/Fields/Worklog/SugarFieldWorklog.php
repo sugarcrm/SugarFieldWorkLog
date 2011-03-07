@@ -21,7 +21,10 @@ class SugarFieldWorklog extends SugarFieldText
 
     public function save(&$bean, $params, $field, $properties, $prefix = '')
     {
-        // we don't need to do anything as the worklog is empty
+        if(isset($params['duplicateSave']) && $params['duplicateSave'] == "true") {
+            // empty out the worklog on save.
+            $bean->$field = "";
+        }
         if(empty($params[$field . '_worklog'])) return;
 
         global $current_user, $timedate, $sugar_config;
