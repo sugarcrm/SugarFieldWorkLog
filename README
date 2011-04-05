@@ -6,13 +6,10 @@ By Jon Whitcraft - Lead Internal Applications Engineer SugarCRM
 How To Use:
 If you are adding a new field add a textarea field and then add the following lines to a file in custom/Extension/modules/<module name>/Ext/Vardefs/<some creative name>.php
 
-```php
-<?php
+    <?php
 
-$dictionary['Bug']['fields']['work_log']['type'] = 'worklog';
-$dictionary['Bug']['fields']['work_log']['dbType'] = 'text';
-
-```
+    $dictionary['Bug']['fields']['work_log']['type'] = 'worklog';
+    $dictionary['Bug']['fields']['work_log']['dbType'] = 'text';
 
 You can also convert a current textarea field to a worklog field by adding the above code to a file.
 
