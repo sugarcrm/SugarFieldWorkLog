@@ -76,6 +76,9 @@ $installdefs = array(
 		array('from'=> '<basepath>/custom/include/',
 			  'to'=> 'custom/include',
 		),
+        array('from'=> '<basepath>/include/generic/SugarWidgets/SugarWidgetFieldworklog.php',
+			  'to'=> 'include/generic/SugarWidgets/SugarWidgetFieldworklog.php',
+		),
 	),
 
 	'language'=> array(
