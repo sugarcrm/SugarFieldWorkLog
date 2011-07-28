@@ -16,3 +16,6 @@ You can also convert a current textarea field to a worklog field by adding the a
 Issues to fix:
 - Not Saving the new field
 - Not showing the correct form in the Module Builder
+
+---------------------------------
+SugarFieldWorklog by Jon Whitcraft is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License. http://creativecommons.org/licenses/by-sa/3.0/
