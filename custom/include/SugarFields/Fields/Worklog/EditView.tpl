@@ -1,12 +1,6 @@
-{assign var="value" value={{sugarvar key='value' string=true}} }
-{php}
-if(isset($_POST['isDuplicate']) && $_POST['isDuplicate'] == "true") {
-    $value = "";
-} else {
-    $value = preg_replace("#&lt;(/)?b&gt;#", "<$1b>", $this->_tpl_vars['value']);
-}
-echo nl2br(url2html($value));
-{/php}
-<br /><br />
+{if !empty({{sugarvar key='value' string=true}})}
+    {{if empty($displayParams.textonly)}}{{sugarvar_regex key='value' search="#&lt;(/)?b&gt;#" replace='<$1b>' htmlentitydecode='true'}}{{else}}{{sugarvar key='value'}}{{/if}}
+    <br /><br />
+{/if}
 <h4>Enter New Work Log</h4>
 <textarea id='{{sugarvar key='name'}}_worklog' name='{{sugarvar key='name'}}_worklog' tabindex='{{$tabindex}}' cols="120" rows="6"></textarea>

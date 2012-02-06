@@ -38,44 +38,77 @@
  * d) Grant Licensor a world-wide, non-exclusive, royalty-free license to use,
  *    reproduce, perform, modify, sublicense, and distribute your extensions.
  *
-* The Original Code is: SugarCRM
- *                       Kenneth brill
- *                       2008-11-03 kbrill@sugarcrm.com
- *
  * The Initial Developer of the Original Code is Kenneth Brill
  * All Rights Reserved.
  ********************************************************************************/
 $manifest = array(
 
-	'acceptable_sugar_versions' => array (
-		'regex_matches' => array (
-			"6\.*",
-		),
-	),
-	'acceptable_sugar_flavors' => array (
-		0 => 'OS',
-		1 => 'PRO',
-		2 => 'ENT',
-		3 => 'CE',
-	),
-	'name'			=> 'WorkLog Custom Field',
-	'description'		=> 'A Custom Worklog Field',
-	'author' 		=> 'Jon Whitcraft',
-	'published_date'	=> '1/31/2011',
-	'version' 		=> '0.7.1',
-	'type' 			=> 'module',
-	'is_uninstallable'	=> true,
+    'acceptable_sugar_versions' => array(
+        'regex_matches' => array(
+            "6\.*",
+        ),
+    ),
+    'acceptable_sugar_flavors' => array(
+        0 => 'OS',
+        1 => 'PRO',
+        2 => 'ENT',
+        3 => 'CE',
+    ),
+    'readme' => '',
+    'name' => 'WorkLog Custom Field',
+    'description' => 'A Custom Worklog Field',
+    'author' => 'Jon Whitcraft <jwhitcraft at sugarcrm.com>',
+    'published_date' => '2/5/2012',
+    'version' => '1.0',
+    'type' => 'module',
+    'is_uninstallable' => true,
 );
 
 $installdefs = array(
-	'id'=> '4f78ec2dfef05b22d287f425659c92ac', // md5 of 'jwhitcraft-worklog-field'
-	'copy' => array(
-		array('from'=> '<basepath>/custom/modules/',
-			  'to'=> 'custom/modules',
-		),
-		array('from'=> '<basepath>/custom/include/',
-			  'to'=> 'custom/include',
-		),
+    'id' => '4f78ec2dfef05b22d287f425659c92ac', // md5 of 'jwhitcraft-worklog-field'
+    'language' => array(
+        array(
+            'from' => '<basepath>/languages/Notes/en_us.lang.php',
+            'to_module' => 'Notes',
+            'language' => 'en_us'
+        )
+    ),
+    'mkdir' => array(
+        array('path' => 'custom/include'),
+        array('path' => 'custom/include/Smarty'),
+        array('path' => 'custom/include/Smarty/plugins'),
+        array('path' => 'custom/include/SugarFields'),
+        array('path' => 'custom/include/SugarFields/Fields'),
+    ),
+    'copy' => array(
+        array('from' => '<basepath>/custom/include/',
+            'to' => 'custom/include',
+        ),
+    ),
+    'custom_fields' => array(
+        'Notesdisplay_in_worklog_c' => array(
+            'comments' => NULL,
+            'help' => NULL,
+            'module' => 'Notes',
+            'type' => 'bool',
+            'max_size' => '255',
+            'require_option' => '0',
+            'default_value' => NULL,
+            'deleted' => '0',
+            'audited' => '0',
+            'mass_update' => '0',
+            'duplicate_merge' => '0',
+            'reportable' => '0',
+            'importable' => 'true',
+            'ext1' => NULL,
+            'ext2' => NULL,
+            'ext3' => NULL,
+            'ext4' => NULL,
+            'label' => 'LBL_DISPLAY_IN_WORKLOG',
+            'name' => 'display_in_worklog_c',
+            'id' => 'Notesdisplay_in_worklog_c',
+        ),
+    )
         array('from'=> '<basepath>/include/generic/SugarWidgets/SugarWidgetFieldworklog.php',
 			  'to'=> 'include/generic/SugarWidgets/SugarWidgetFieldworklog.php',
 		),
