@@ -59,7 +59,7 @@ $manifest = array(
     'description' => 'A Custom Worklog Field',
     'author' => 'Jon Whitcraft <jwhitcraft at sugarcrm.com>',
     'published_date' => '2/10/2012',
-    'version' => '1.0.1',
+    'version' => '1.1.0',
     'type' => 'module',
     'is_uninstallable' => true,
 );
