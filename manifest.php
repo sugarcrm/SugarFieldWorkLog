@@ -58,8 +58,8 @@ $manifest = array(
     'name' => 'WorkLog Custom Field',
     'description' => 'A Custom Worklog Field',
     'author' => 'Jon Whitcraft <jwhitcraft at sugarcrm.com>',
-    'published_date' => '2/5/2012',
-    'version' => '1.0',
+    'published_date' => '2/10/2012',
+    'version' => '1.0.1',
     'type' => 'module',
     'is_uninstallable' => true,
 );
@@ -83,6 +83,9 @@ $installdefs = array(
     'copy' => array(
         array('from' => '<basepath>/custom/include/',
             'to' => 'custom/include',
+        ),
+        array('from'=> '<basepath>/include/generic/SugarWidgets/SugarWidgetFieldworklog.php',
+            'to'=> 'include/generic/SugarWidgets/SugarWidgetFieldworklog.php',
         ),
     ),
     'custom_fields' => array(
@@ -108,11 +111,7 @@ $installdefs = array(
             'name' => 'display_in_worklog_c',
             'id' => 'Notesdisplay_in_worklog_c',
         ),
-    )
-        array('from'=> '<basepath>/include/generic/SugarWidgets/SugarWidgetFieldworklog.php',
-			  'to'=> 'include/generic/SugarWidgets/SugarWidgetFieldworklog.php',
-		),
-	),
+    ),
 
 	'language'=> array(
 		array('from'=> '<basepath>/language/ModuleBuilder/language/en_us.lang.php',
