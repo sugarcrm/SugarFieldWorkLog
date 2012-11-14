@@ -4,7 +4,7 @@ By Jon Whitcraft - Engineer at SugarCRM
 
 How To Use:
 ---------------------------------
-1 Download the add-on from https://github.com/downloads/sugarcrm/SugarFieldWorkLog/SugarFieldWorklog-v1.1.0.zip
+1 Download the add-on from https://github.com/downloads/sugarcrm/SugarFieldWorkLog/SugarFieldWorklog-v1.1.1.zip
 
 2 Install the zip file via the Module Loader in the Admin Section
 
