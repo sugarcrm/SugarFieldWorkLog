@@ -2,6 +2,10 @@ SugarCRM Custom Field - Worklog (v1.0)
 ================================
 By Jon Whitcraft - Engineer at SugarCRM
 
+Updates and Information
+---------------------------------
+Please note that this will *not* be supported in Sugar7.  Sugar7 has the awesome new feature of ActivitySteams which provide simular functionality, but with better features. You can find out more about Sugar7 here: http://www.sugarcrm.com/sugar7
+
 How To Use:
 ---------------------------------
 1 Download the add-on from https://github.com/downloads/sugarcrm/SugarFieldWorkLog/SugarFieldWorklog-v1.1.1.zip
