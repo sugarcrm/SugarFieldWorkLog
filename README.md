@@ -1,6 +1,10 @@
-SugarCRM Custom Field - Worklog (v1.0)
+SugarCRM 6.x Custom Field - Worklog (v1.0)
 ================================
 By Jon Whitcraft - Engineer at SugarCRM
+
+SugarCRM 7.x Worklog field
+================================
+[Check here for the version that support 7.x](https://github.com/geraldclark/WorklogField)
 
 Updates and Information
 ---------------------------------
