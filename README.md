@@ -40,4 +40,4 @@ ToDos
 
 License
 ---------------------------------
-SugarFieldWorklog by Jon Whitcraft is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License. http://creativecommons.org/licenses/by-sa/3.0/
+Apache 2.0 - [2011-2014] © SugarCRM Inc.

@@ -8,6 +8,3 @@ function pre_uninstall()
 
 	echo "<br><strong>Worklog Field for SugarCRM has been successfully uninstalled</strong>";
 }
-
-?>
-- 
