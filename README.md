@@ -40,4 +40,4 @@ ToDos
 
 License
 ---------------------------------
-Apache 2.0 - [2011-2014] © SugarCRM Inc.
+Apache 2.0 - 2011-2014 © SugarCRM Inc.
