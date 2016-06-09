@@ -6,7 +6,7 @@ This field was created as a replacement for the original worklog field by Jon Wh
 # Usage
 This repo is the source for a module loadable package that can be installed to Sugar through the module loader. Once installed, Administrators can navigate to Admin / Studio / {module>} / Fields and create a new database field with the type of 'Worklog'.
 
-* If you are a developer and would like to convert an existing field to a worklog type field, you will need to implement a custom vardef extension in ./custom/Extension/modules/{module}/Ext/Vardefs/{filename}.php that contains:
+* If you are a developer and would like to convert an existing field to a worklog type field, you will need to implement a custom vardef extension in ./custom/Extension/modules/{module}/Ext/Vardefs/{filename}.php that contains the code below. It is very important to convert the fields db column to a type that can support large blocks of text such as longtext or you may run into truncation issues.
 
 ```php
 <?php
