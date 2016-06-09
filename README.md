@@ -1,4 +1,4 @@
-WorklogField
+Work Log Field
 ============
 
 This is a module loadable field type for use with Sugar 7. The key features of this field type is that worklog entries will be adjusted by the current users display preferences for user names, timezones, and date formats.
