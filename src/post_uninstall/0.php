@@ -3,8 +3,7 @@
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 $output = true;
-if (php_sapi_name() === 'cli')
-{
+if (php_sapi_name() === 'cli') {
      $output = false;
 }
 
