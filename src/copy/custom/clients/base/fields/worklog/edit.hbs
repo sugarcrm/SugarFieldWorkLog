@@ -1,0 +1,6 @@
+{{{displayValue.long}}}
+</p>
+<textarea rows="{{def.rows}}" cols="{{def.cols}}" name="{{name}}"{{#if def.placeholder}}
+          placeholder="{{str def.placeholder module}}"{{/if}}
+          class="input-xlarge wide tleft"{{#if def.tabindex}} tabindex="{{def.tabindex}}"{{/if}}>{{value}}</textarea>
+{{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}

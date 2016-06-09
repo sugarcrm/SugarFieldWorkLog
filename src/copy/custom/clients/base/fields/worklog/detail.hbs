@@ -1,0 +1,39 @@
+<div>
+    {{#notEq displayValue.long displayValue.short}}
+        {{#if collapsed}}
+            {{#if _settings.reverse_lines}}
+                <button data-action="toggle" class="btn btn-link btn-invisible toggle-text">
+                    {{str 'LBL_WORKLOG_PREVIOUS'}}
+                </button>
+                <br>
+                &hellip;
+                <br>
+            {{/if}}
+            {{{displayValue.short}}}
+            {{#eq _settings.reverse_lines false}}
+                <br>&hellip;
+            {{/eq}}
+        {{else}}
+            {{{displayValue.long}}}
+            {{#if _settings.reverse_lines}}
+                <br>
+                <button data-action="toggle" class="btn btn-link btn-invisible toggle-text">
+                    {{str 'LBL_WORKLOG_LESS'}}
+                </button>
+            {{/if}}
+        {{/if}}
+        {{#eq _settings.reverse_lines false}}
+        <br>
+        <button data-action="toggle" class="btn btn-link btn-invisible toggle-text">
+            {{#if collapsed}}
+                {{str 'LBL_WORKLOG_MORE'}}
+            {{else}}
+                {{str 'LBL_WORKLOG_LESS'}}
+            {{/if}}
+        </button>
+        {{/eq}}
+    {{/notEq}}
+    {{#eq displayValue.long displayValue.short}}
+        {{{displayValue.long}}}
+    {{/eq}}
+</div>

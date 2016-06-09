@@ -1,0 +1,39 @@
+<div>
+    {{#notEq displayValue.long displayValue.short}}
+        {{#if collapsed}}
+            {{#if _settings.reverse_lines}}
+                <button data-action="toggle" class="btn btn-link btn-invisible toggle-text">
+                    <div class="ellipsis_inline" data-placement="bottom" title="{{str 'LBL_WORKLOG_PREVIOUS'}}">{{str 'LBL_WORKLOG_PREVIOUS'}}</div>
+                </button>
+                <br>
+                &hellip;
+                <br>
+            {{/if}}
+            <div class="ellipsis_inline" data-placement="bottom" title="">{{{displayValue.short}}}</div>
+            {{#eq _settings.reverse_lines false}}
+                <br>&hellip;
+            {{/eq}}
+        {{else}}
+            {{{displayValue.long}}}
+            {{#if _settings.reverse_lines}}
+                <br>
+                <button data-action="toggle" class="btn btn-link btn-invisible toggle-text">
+                    <div class="ellipsis_inline" data-placement="bottom" title="{{str 'LBL_WORKLOG_LESS'}}">{{str 'LBL_WORKLOG_LESS'}}</div>
+                </button>
+            {{/if}}
+        {{/if}}
+        {{#eq _settings.reverse_lines false}}
+        <br>
+        <button data-action="toggle" class="btn btn-link btn-invisible toggle-text">
+            {{#if collapsed}}
+                <div class="ellipsis_inline" data-placement="bottom" title="{{str 'LBL_WORKLOG_MORE'}}">{{str 'LBL_WORKLOG_MORE'}}</div>
+            {{else}}
+                <div class="ellipsis_inline" data-placement="bottom" title="{{str 'LBL_WORKLOG_LESS'}}">{{str 'LBL_WORKLOG_LESS'}}</div>
+            {{/if}}
+        </button>
+        {{/eq}}
+    {{/notEq}}
+    {{#eq displayValue.long displayValue.short}}
+        <div class="ellipsis_inline" data-placement="bottom" title="">{{{displayValue.long}}}</div>
+    {{/eq}}
+</div>

@@ -1,43 +1,56 @@
-SugarCRM 6.x Custom Field - Worklog (v1.0)
-================================
-By Jon Whitcraft - Engineer at SugarCRM
+WorklogField
+============
 
-Support For SugarCRM 7.x
-================================
-[Check here for a version of the Worklog field support 7.x](https://github.com/geraldclark/WorklogField)
+This is a module loadable field type for use with Sugar 7. The key features of this field type is that worklog entries will be adjusted by the current users display preferences for user names, timezones, and date formats.
+This field was created as a replacement for the original worklog field by Jon Whitcraft ( http://h2ik.co/2012/02/sugarfield-worklog-v1-0-released/ ) as it is not currently being adapted from 6.x.
+# Usage
+This repo is the source for a module loadable package that can be installed to Sugar through the module loader. Once installed, Administrators can navigate to Admin / Studio / {module>} / Fields and create a new database field with the type of 'Worklog'.
 
-
-How To Use:
----------------------------------
-1 Download the add-on from https://github.com/downloads/sugarcrm/SugarFieldWorkLog/SugarFieldWorklog-v1.1.1.zip
-
-2 Install the zip file via the Module Loader in the Admin Section
-
-3 Add the custom code found below.
-
-If you are adding a new field add a textarea field and then add the following lines to a file in custom/Extension/modules/<module name>/Ext/Vardefs/<some creative name>.php
-
+* If you are a developer and would like to convert an existing field to a worklog type field, you will need to implement a custom vardef extension in ./custom/Extension/modules/{module}/Ext/Vardefs/{filename}.php that contains:
 
 ```php
 <?php
+    //<singular module name> is the singular name of your module. The example being to use "Account" not "Accounts".
+    //<field name> is the name of the text field to place the worklog UI over.
+    $dictionary[<singular module name>]['fields'][<field name>]['type']='worklog';
+    $dictionary[<singular module name>]['fields'][<field name>]['dbType']='text';
 
-// new way that will store the data as a note attached to the record
-// this is the recommended way to do this
-$dictionary['Bug']['fields']['work_log']['type'] = 'notesworklog';
-$dictionary['Bug']['fields']['work_log']['dbType'] = 'text';
-
-// legacy way that will store the data in the field on the recored
-$dictionary['Bug']['fields']['work_log']['type'] = 'worklog';
-$dictionary['Bug']['fields']['work_log']['dbType'] = 'text';
+    //for elastic search
+    $dictionary[<singular module name>]['fields'][<field name>]['full_text_search']['type'] = 'text';
+    $dictionary[<singular module name>]['fields'][<field name>]['full_text_search']['boost'] = '3';
+    $dictionary[<singular module name>]['fields'][<field name>]['full_text_search']['enabled'] = true;
+?>
 ```
-You can also convert a current textarea field to a worklog field by adding the above code to a file.
 
-ToDos
----------------------------------
-* Attachment Support in Display
-* Display in Portal checkbox if portal is enabled on instance.
-* Inline Editing
+* To implement report filtering, you will need to make a core file change in modules/Reports/templates/templates_modules_def_js.php at line 486 by adding  `filter_defs['worklog'] = qualifiers;`.
+* This field is not supported in workflow.
+* This field does not currently support being sent in a stock email template.
+* If you need to decode the history json for a customization, you can do:
 
-License
----------------------------------
-Apache 2.0 - 2011-2014 © SugarCRM Inc.
+```php
+<?php
+    require_once('custom/include/SugarFields/Fields/Worklog/SugarFieldWorklogHelpers.php');
+    //you can pass in a user object as a second parameter to decodeJsonValue to convert the timestamps to a specific users timezone
+    $displayValue = SugarFieldWorklogHelpers::decodeJsonValue($bean-><field name>));
+?>
+```
+
+To Do
+============
+- Implement mobile layouts
+
+#Building Installer Package
+To build the installer package, you will need to download the contents on this repository and execute:
+```
+php build.php
+```
+Once completed, the installer .zip package will be located under `./builds/`.
+    
+#Contributing
+Everyone is welcome to be involved by creating or improving functionality. If you would like to contribute, please make sure to review the [CONTRIBUTOR TERMS](CONTRIBUTOR TERMS.pdf). When you update this [README](README.md), please check out the [contribution guidelines](CONTRIBUTING.md) for helpful hints and tips that will make it easier to accept your pull request.
+
+## Contributors
+[Jerry Clark](https://github.com/geraldclark)
+
+# Licensed under Apache
+© 2016 SugarCRM Inc.  Licensed by SugarCRM under the Apache 2.0 license.
