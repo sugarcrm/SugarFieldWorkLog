@@ -51,6 +51,7 @@ Everyone is welcome to be involved by creating or improving functionality. If yo
 
 ## Contributors
 [Jerry Clark](https://github.com/geraldclark)
+[Jon Whitcraft](https://github.com/jwhitcraft)
 
 # Licensed under Apache
 © 2016 SugarCRM Inc.  Licensed by SugarCRM under the Apache 2.0 license.
