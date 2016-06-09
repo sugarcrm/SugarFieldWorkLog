@@ -25,7 +25,7 @@ $manifest = array (
   'name' => 'SugarField Work Log Field',
   'published_date' => '2014-09-15 15:53:05',
   'type' => 'module',
-  'version' => '2.6',
+  'version' => '2.6.0',
   'remove_tables' => '',
 );
 
