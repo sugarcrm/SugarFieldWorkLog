@@ -51,6 +51,7 @@ Everyone is welcome to be involved by creating or improving functionality. If yo
 
 ## Contributors
 [Jerry Clark](https://github.com/geraldclark)
+
 [Jon Whitcraft](https://github.com/jwhitcraft)
 
 # Licensed under Apache
