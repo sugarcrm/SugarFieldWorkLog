@@ -2,7 +2,7 @@
     /**
      * {@inheritDoc}
      */
-    fieldTag : 'textarea',
+    fieldTag: 'textarea',
     displayValue: '',
 
     /**
@@ -64,7 +64,7 @@
      * Also sets {@link View.Fields.BaseTextareaField#collapsed collapsed}
      * to the value in `this._settings.collapsed` (either default or metadata).
      */
-    initialize: function(options) {
+    initialize: function (options) {
         this._super('initialize', [options]);
         this._initSettings();
         this.collapsed = this._settings.collapsed;
@@ -77,7 +77,7 @@
      * @return {View.Fields.BaseTextareaField} Instance of this field.
      * @protected
      */
-    _initSettings: function() {
+    _initSettings: function () {
         this._settings = _.extend({},
             this._defaultSettings,
             this.def && this.def.settings || {}
@@ -92,7 +92,7 @@
      *
      * @param {String} name The mode to set the field to.
      */
-    setMode: function(name) {
+    setMode: function (name) {
         var mode = (this.tplName === 'list') && _.contains(['edit', 'disabled'], name) ? this.tplName : name;
         this._super('setMode', [mode]);
     },
@@ -109,22 +109,21 @@
      * @param {String} value The value set on the textarea field.
      * @return {String|Object} The value set on the textarea field.
      */
-    format: function(value) {
+    format: function (value) {
 
         if (this.tplName !== 'edit') {
 
-            var long = this.model.get(this.name+'_history');
+            var long = this.model.get(this.name + '_history');
 
-            if (_.isUndefined(long))
-            {
+            if (_.isUndefined(long)) {
                 long = '';
             }
 
             long = long.trim();
 
-            if (!_.isUndefined(value) && !_.isEmpty(value))
-            {
-                long = long + "<hr>" + value;
+            if (!_.isUndefined(value) && !_.isEmpty(value)) {
+                var escapedValue = $('<div/>').text(value).html();
+                long = long + "<hr>" + escapedValue;
             }
 
             this.displayValue = {long: long, short: long};
@@ -133,22 +132,17 @@
 
             var logLines = this.displayValue.long.split('<br>');
 
-            if (_.size(logLines) > this._settings.max_lines)
-            {
+            if (_.size(logLines) > this._settings.max_lines) {
                 var short = '';
 
-                if (this._settings.reverse_lines)
-                {
+                if (this._settings.reverse_lines) {
                     var offset = parseInt(_.size(logLines), 10) - this._settings.max_lines;
-                    for (var i = offset; i < _.size(logLines); i++)
-                    {
+                    for (var i = offset; i < _.size(logLines); i++) {
                         short += logLines[i] + '<br>';
                     }
                 }
-                else
-                {
-                    for (var i = 0; i < this._settings.max_lines; i++)
-                    {
+                else {
+                    for (var i = 0; i < this._settings.max_lines; i++) {
                         short += logLines[i] + '<br>';
                     }
                 }
@@ -165,7 +159,7 @@
      * Toggles the field between displaying the truncated `short` or `long`
      * value for the field, and toggles the label for the 'more/less' link.
      */
-    toggleCollapsed: function() {
+    toggleCollapsed: function () {
         this.collapsed = !this.collapsed;
         this.render();
     }
