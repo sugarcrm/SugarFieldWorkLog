@@ -33,7 +33,7 @@ class SugarFieldWorklogHelpers
                     if (!isset($worklog['tsp']) || $worklog['tsp'] == 0) {
                         $string .= self::getMessageString($worklog['msg']);
                     } else {
-                        $string .= self::getMessageString(htmlspecialchars($worklog['msg'], ENT_QUOTES));
+                        $string .= self::getMessageString(htmlspecialchars($worklog['msg'], ENT_QUOTES, 'UTF-8'));
                     }
                 }
 
