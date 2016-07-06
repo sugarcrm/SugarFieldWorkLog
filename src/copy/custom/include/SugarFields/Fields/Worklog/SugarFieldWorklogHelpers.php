@@ -4,53 +4,6 @@ class SugarFieldWorklogHelpers
 {
     static $urlREGEX = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+(\/\S*)?/";
 
-
-    /**
-     * Decodes the json or text from the database for display
-     * @param $value
-     * @return string
-     */
-    public static function decodeJsonValueForAPI($value, $targetUser = null, $userLink = false)
-    {
-        if (!is_object($targetUser)) {
-            global $current_user;
-            $targetUser = $current_user;
-        }
-
-        $display = array();
-        if (self::isJson($value)) {
-            $worklogs = json_decode($value, true);
-            foreach ($worklogs as $worklog) {
-
-                if (isset($worklog['usr']) && isset($worklog['tsp'])) {
-                    $display[$worklog['tsp']]['date'] = self::getDateTimeString($worklog['tsp'], $targetUser);
-                    $display[$worklog['tsp']]['user']['id'] = $worklog['usr'];
-                    $display[$worklog['tsp']]['user']['id'] = $worklog['usr'];
-
-                    $string = '<small><strong>';
-                    $string .= self::getUserString($worklog['usr'], $userLink);
-                    $string .= " on ";
-                    $string .= self::getDateTimeString($worklog['tsp'], $targetUser);
-                    $string .= '</strong></small>';
-                }
-
-                if (isset($worklog['msg'])) {
-                    if (!isset($worklog['tsp']) || $worklog['tsp'] == 0) {
-                        $string .= self::getMessageString($worklog['msg']);
-                    } else {
-                        $string .= self::getMessageString(htmlspecialchars($worklog['msg'], ENT_QUOTES));
-                    }
-                }
-
-                $display[$worklog['tsp']] = $string;
-            }
-        } else {
-            $display[0] = self::getMessageString($value);
-        }
-
-        return $display;
-    }
-
     /**
      * Decodes the json or text from the database for display
      * @param $value
