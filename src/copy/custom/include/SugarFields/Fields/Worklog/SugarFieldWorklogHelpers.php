@@ -4,6 +4,53 @@ class SugarFieldWorklogHelpers
 {
     static $urlREGEX = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+(\/\S*)?/";
 
+
+    /**
+     * Decodes the json or text from the database for display
+     * @param $value
+     * @return string
+     */
+    public static function decodeJsonValueForAPI($value, $targetUser = null, $userLink = false)
+    {
+        if (!is_object($targetUser)) {
+            global $current_user;
+            $targetUser = $current_user;
+        }
+
+        $display = array();
+        if (self::isJson($value)) {
+            $worklogs = json_decode($value, true);
+            foreach ($worklogs as $worklog) {
+
+                if (isset($worklog['usr']) && isset($worklog['tsp'])) {
+                    $display[$worklog['tsp']]['date'] = self::getDateTimeString($worklog['tsp'], $targetUser);
+                    $display[$worklog['tsp']]['user']['id'] = $worklog['usr'];
+                    $display[$worklog['tsp']]['user']['id'] = $worklog['usr'];
+
+                    $string = '<small><strong>';
+                    $string .= self::getUserString($worklog['usr'], $userLink);
+                    $string .= " on ";
+                    $string .= self::getDateTimeString($worklog['tsp'], $targetUser);
+                    $string .= '</strong></small>';
+                }
+
+                if (isset($worklog['msg'])) {
+                    if (!isset($worklog['tsp']) || $worklog['tsp'] == 0) {
+                        $string .= self::getMessageString($worklog['msg']);
+                    } else {
+                        $string .= self::getMessageString(htmlspecialchars($worklog['msg'], ENT_QUOTES));
+                    }
+                }
+
+                $display[$worklog['tsp']] = $string;
+            }
+        } else {
+            $display[0] = self::getMessageString($value);
+        }
+
+        return $display;
+    }
+
     /**
      * Decodes the json or text from the database for display
      * @param $value
@@ -254,17 +301,23 @@ class SugarFieldWorklogHelpers
         }
         //if weve already updated the worklog during this save and the value is already json
         if (SugarFieldWorklogHelpers::isJson($bean->$field)) {
+            $updated = false;
             $worklogAdditions = json_decode($bean->$field, true);
             foreach ($worklogAdditions as $key => $worklogAddition) {
                 if (
-                    isset($worklogAddition['tsp'])
+                    is_array($worklogAddition)
+                    && isset($worklogAddition['tsp'])
                     && isset($worklogAddition['usr'])
                     && isset($worklogAddition['msg'])
                 ) {
+                    $updated = true;
                     $worklogs[$key] = $worklogAddition;
                 }
             }
-            $value = json_encode($worklogs);
+
+            if ($updated) {
+                $value = json_encode($worklogs);
+            }
         }
         if (empty($logEntry)) {
             $bean->$field = $value;
