@@ -4,7 +4,7 @@ Work Log Field
 This is a module loadable field type for use with Sugar 7. The key features of this field type is that worklog entries will be adjusted by the current users display preferences for user names, timezones, and date formats.
 This field was created as a replacement for the original worklog field by Jon Whitcraft ( http://h2ik.co/2012/02/sugarfield-worklog-v1-0-released/ ) as it is not currently being adapted from 6.x.
 # Usage
-This repo is the source for a module loadable package that can be installed to Sugar through the module loader. Once installed, Administrators can navigate to Admin / Studio / {module>} / Fields and create a new database field with the type of 'Worklog'.
+This repo is the source for a module loadable package that can be installed to Sugar through the module loader. Once installed, Administrators can navigate to Admin / Studio / {module} / Fields and create a new database field with the type of 'Worklog'.
 
 * If you are a developer and would like to convert an existing field to a worklog type field, you will need to implement a custom vardef extension in ./custom/Extension/modules/{module}/Ext/Vardefs/{filename}.php that contains the code below. It is very important to convert the fields db column to a type that can support large blocks of text such as longtext or you may run into truncation issues.
 
