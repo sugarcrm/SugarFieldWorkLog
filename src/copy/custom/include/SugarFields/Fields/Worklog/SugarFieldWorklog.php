@@ -1,7 +1,7 @@
 <?php
 
-require_once('include/SugarFields/Fields/Text/SugarFieldText.php');
-require_once('custom/include/SugarFields/Fields/Worklog/SugarFieldWorklogHelpers.php');
+require_once 'include/SugarFields/Fields/Text/SugarFieldText.php';
+require_once 'custom/include/SugarFields/Fields/Worklog/SugarFieldWorklogHelpers.php';
 
 class SugarFieldWorklog extends SugarFieldText
 {
@@ -12,8 +12,18 @@ class SugarFieldWorklog extends SugarFieldText
      * @param array $args
      * @param string $fieldName
      * @param array $properties
+     * @param array|null $fieldList
+     * @param ServiceBase|null $service
      */
-    public function apiFormatField(array &$data, SugarBean $bean, array $args, $fieldName, $properties)
+    public function apiFormatField(
+        array &$data,
+        SugarBean $bean,
+        array $args,
+        $fieldName,
+        $properties,
+        array $fieldList = null,
+        ServiceBase $service = null
+    )
     {
         global $current_user;
         $value = SugarFieldWorklogHelpers::decodeJsonValue($bean->$fieldName, $current_user, true);
