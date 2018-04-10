@@ -1,6 +1,6 @@
 <?php
 
-require_once('clients/base/filters/operators/operators.php');
+require 'clients/base/filters/operators/operators.php';
 
 $viewdefs['base']['filter']['operators']['worklog'] = array(
     '$contains' => 'LBL_WORKLOG_OPERATOR_CONTAINS',

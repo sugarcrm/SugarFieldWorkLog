@@ -2,7 +2,7 @@
 
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
-require_once('include/generic/SugarWidgets/SugarWidgetFieldtext.php');
+require_once 'include/generic/SugarWidgets/SugarWidgetFieldtext.php';
 
 class SugarWidgetFieldWorklog extends SugarWidgetFieldText
 {
@@ -14,14 +14,14 @@ class SugarWidgetFieldWorklog extends SugarWidgetFieldText
     function queryFilterEquals($layout_def)
     {
         return $this->reporter->db->convert($this->_get_column_select($layout_def), "text2char") .
-        " = " . $this->reporter->db->quoted($layout_def['input_name0']);
+            " = " . $this->reporter->db->quoted($layout_def['input_name0']);
     }
 
     function queryFilterNot_Equals_Str($layout_def)
     {
         $column = $this->_get_column_select($layout_def);
         return "($column IS NULL OR " . $this->reporter->db->convert($column, "text2char") . " != " .
-        $this->reporter->db->quoted($layout_def['input_name0']) . ")";
+            $this->reporter->db->quoted($layout_def['input_name0']) . ")";
     }
 
     function queryFilterNot_Empty($layout_def)

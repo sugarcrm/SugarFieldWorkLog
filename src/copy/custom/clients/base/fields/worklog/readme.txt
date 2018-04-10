@@ -17,7 +17,7 @@ Once installed, you will need to implement a custom vardef extension in ./custom
 - If you need to decode the history json, you can do:
 
 <?php
-    require_once('custom/include/SugarFields/Fields/Worklog/SugarFieldWorklogHelpers.php');
+    require_once 'custom/include/SugarFields/Fields/Worklog/SugarFieldWorklogHelpers.php';
     //you can pass in a user object as a second parameter to decodeJsonValue to convert the timestamps to a specific users timezone
     $displayValue = SugarFieldWorklogHelpers::decodeJsonValue($bean-><field name>));
 ?>

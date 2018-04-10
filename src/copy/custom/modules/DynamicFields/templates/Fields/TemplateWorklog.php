@@ -2,7 +2,7 @@
 
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
-require_once('modules/DynamicFields/templates/Fields/TemplateText.php');
+require_once 'modules/DynamicFields/templates/Fields/TemplateText.php';
 
 class TemplateWorklog extends TemplateText
 {
