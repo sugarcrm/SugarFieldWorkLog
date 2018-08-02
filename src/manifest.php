@@ -8,6 +8,8 @@ $manifest = array (
             '^7.7\\..+',
             '^7.8\\..+',
             '^7.9\\..+'
+            '^8.0\\..+'
+            '^8.1\\..+'
         )
     ),
     'acceptable_sugar_flavors' => array(
