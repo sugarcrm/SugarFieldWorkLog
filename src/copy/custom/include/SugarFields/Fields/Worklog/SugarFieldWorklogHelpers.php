@@ -7,9 +7,7 @@ class SugarFieldWorklogHelpers
     /**
      * Parses the json for a migration to the comment log
      * @param $value
-     * @param null $targetUser
-     * @param bool $userLink
-     * @return string
+     * @return array
      */
     public static function parseJsonValue($value)
     {
