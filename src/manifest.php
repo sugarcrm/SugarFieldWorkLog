@@ -9,7 +9,9 @@ $manifest = array (
             '^7.8\\..+',
             '^7.9\\..+',
             '^8.0\\..+',
-            '^8.1\\..+'
+            '^8.1\\..+',
+            '^8.2\\..+',
+            '^8.3\\..+',
         )
     ),
     'acceptable_sugar_flavors' => array(
@@ -25,9 +27,9 @@ $manifest = array (
   'icon' => '',
   'is_uninstallable' => true,
   'name' => 'SugarField Work Log Field',
-  'published_date' => '2014-09-15 15:53:05',
+  'published_date' => '2018-11-30 00:00:00',
   'type' => 'module',
-  'version' => '2.6.1',
+  'version' => '2.6.2',
   'remove_tables' => '',
 );
 
