@@ -81,6 +81,7 @@ class Migrate extends Command implements InstanceModeInterface
         $connection = $GLOBALS['db']->getConnection();
 
         while ($run) {
+            $output->writeln("Processing {$limit} records from offset {$offset}");
             \BeanFactory::clearCache();
             $query = new \SugarQuery();
             $query->select(array(

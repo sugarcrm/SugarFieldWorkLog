@@ -35,10 +35,12 @@ class SugarFieldWorklogHelpers
                 }
 
                 if (isset($worklog['msg']) && !empty($worklog['msg'])) {
-                    $record['msg'] = $worklog['msg'];
+                    $record['msg'] = trim($worklog['msg']);
                 }
 
-                $records[] = $record;
+                if (!empty($record['msg'])) {
+                    $records[] = $record;
+                }
             }
         } else {
             $record = array(
@@ -46,8 +48,12 @@ class SugarFieldWorklogHelpers
                 'tsp' => $defaultDate,
                 'msg' => '',
             );
-            $record['msg'] = $value;
-            $records[] = $record;
+
+            $record['msg'] = trim($value);
+
+            if (!empty($record['msg'])) {
+                $records[] = $record;
+            }
         }
 
         return $records;
