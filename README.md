@@ -50,7 +50,7 @@ php bin/sugarcrm worklog:migrate <module> <work log field>
     * Entries that are not json encoded or are missing a created by user will show up as `Admin 1969-12-31 07:00pm` in the comment log.
 
 
-If your instance is on SugarCloud, you can ask for Sugar Support to run 
+If your instance is on SugarCloud, you can ask for Sugar Support to run the following command:
 
 ```
 shadowy bin/sugarcrm worklog:migrate <module> <work log field>
