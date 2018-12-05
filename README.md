@@ -41,13 +41,20 @@ As of SUgar 8.3, you may want to migrate to the comment log field. To do so, you
 
 ```
 php bin/sugarcrm worklog:migrate <module> <work log field>
-
 ```
+
 * This command can not be resumed. It is highly recommend to run the command on a backup of your instance and migrate the `commentlog` and `commentlog_rel` tables to your production instance. If you are running this on production, you should backup your database first.
 * This command will directly populate the `commentlog` and `commentlog_rel` tables. It will not make any changes to the existing work log fields.
 * Things to note:
     * Empty entries are ignored
     * Entries that are not json encoded or are missing a created by user will show up as `Admin 1969-12-31 07:00pm` in the comment log.
+
+
+If your instance is on SugarCloud, you can ask for Sugar Support to run 
+
+```
+shadowy bin/sugarcrm worklog:migrate <module> <work log field>
+```
 
 To Do
 ============
