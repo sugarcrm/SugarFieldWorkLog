@@ -37,7 +37,7 @@ This repo is the source for a module loadable package that can be installed to S
 ```
 
 # Migrating
-As of SUgar 8.3, you may want to migrate to the comment log field. To do so, you can use the `worklog:migrate` command in the CLI framework.
+As of Sugar 8.3, you may want to migrate to the comment log field. To do so, you can use the `worklog:migrate` command in the CLI framework.
 
 ```
 php bin/sugarcrm worklog:migrate <module> <work log field>
