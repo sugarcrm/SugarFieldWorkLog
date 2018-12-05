@@ -5,6 +5,55 @@ class SugarFieldWorklogHelpers
     static $urlREGEX = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+(\/\S*)?/";
 
     /**
+     * Parses the json for a migration to the comment log
+     * @param $value
+     * @param null $targetUser
+     * @param bool $userLink
+     * @return string
+     */
+    public static function parseJsonValue($value)
+    {
+        global $timedate;
+        $admin = $GLOBALS['current_user']->getSystemUser();
+        $records = array();
+        $defaultDate = $timedate->fromTimestamp(0)->asDb();
+        if (self::isJson($value)) {
+            $worklogs = json_decode($value, true);
+            foreach ($worklogs as $worklog) {
+                $record = array(
+                    'usr' => $admin->id,
+                    'tsp' => $defaultDate,
+                    'msg' => '',
+                );
+
+                if (isset($worklog['usr']) && !empty($worklog['usr'])) {
+                    $record['usr'] = $worklog['usr'];
+                }
+
+                if (isset($worklog['tsp']) && !empty($worklog['tsp'] && $worklog['tsp'] !== 0)) {
+                    $record['tsp'] = $timedate->fromTimestamp($worklog['tsp'])->asDb();
+                }
+
+                if (isset($worklog['msg']) && !empty($worklog['msg'])) {
+                    $record['msg'] = $worklog['msg'];
+                }
+
+                $records[] = $record;
+            }
+        } else {
+            $record = array(
+                'usr' => $admin->id,
+                'tsp' => $defaultDate,
+                'msg' => '',
+            );
+            $record['msg'] = $value;
+            $records[] = $record;
+        }
+
+        return $records;
+    }
+
+    /**
      * Decodes the json or text from the database for display
      * @param $value
      * @return string
@@ -37,7 +86,11 @@ class SugarFieldWorklogHelpers
                     }
                 }
 
-                $display[$worklog['tsp']] = $string;
+                if (isset($worklog['tsp']) && $worklog['tsp'] !== '') {
+                    $display[$worklog['tsp']] = $string;
+                } else {
+                    $display[0] = $string;
+                }
             }
         } else {
             $display[0] = self::getMessageString($value);
@@ -291,5 +344,41 @@ class SugarFieldWorklogHelpers
             }
             $bean->$field = json_encode($worklogs);
         }
+    }
+
+    /**
+     * Fetches the beans given a sugar query object.
+     * SugarQuery must return an ID field
+     * @param \SugarQuery $query
+     * @param array $retrieveParams
+     * @return array
+     */
+    public static function getBeansFromQuery(\SugarQuery $query, $retrieveParams = array())
+    {
+        $beans = array();
+
+        $module = '';
+        if (!empty($query->from->module_name)) {
+            $module = $query->from->module_name;
+        } else {
+            $queries = $query->union->getQueries();
+            foreach ($queries as $unionQuery) {
+                if (!empty($unionQuery['query']->from->module_name)) {
+                    $module = $unionQuery['query']->from->module_name;
+                    break;
+                }
+            }
+        }
+
+        foreach ($query->execute() as $row) {
+            $bean = \BeanFactory::getBean($module, $row['id'], $retrieveParams);
+            if (!is_object($bean) || empty($bean->id)) {
+                continue;
+            }
+
+            $beans[$row['id']] = $bean;
+        }
+
+        return $beans;
     }
 }
