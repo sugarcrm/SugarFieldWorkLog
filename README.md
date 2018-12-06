@@ -1,7 +1,7 @@
 Work Log Field
 ============
 
-This is a module loadable field type for use with Sugar 7. The key features of this field type is that worklog entries will be adjusted by the current users display preferences for user names, timezones, and date formats.
+This is a module loadable field type for use with Sugar 7+. The key features of this field type is that worklog entries will be adjusted by the current users display preferences for user names, timezones, and date formats.
 This field was created as a replacement for the original worklog field by Jon Whitcraft ( http://h2ik.co/2012/02/sugarfield-worklog-v1-0-released/ ) as it is not currently being adapted from 6.x.
 
 # Usage
@@ -23,7 +23,7 @@ This repo is the source for a module loadable package that can be installed to S
 ?>
 ```
 
-* To implement report filtering, you will need to make a core file change in modules/Reports/templates/templates_modules_def_js.php at line 486 by adding  `filter_defs['worklog'] = qualifiers;`.
+* To implement report filtering, you will need to make a core file change in ./modules/Reports/templates/templates_modules_def_js.php at line 486 by adding  `filter_defs['worklog'] = qualifiers;`.
 * This field is not supported in workflow.
 * This field does not currently support being sent in a stock email template.
 * If you need to decode the history json for a customization, you can do:
