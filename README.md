@@ -47,7 +47,7 @@ php bin/sugarcrm worklog:migrate <module> <work log field>
 * This command will directly populate the `commentlog` and `commentlog_rel` tables. It will not make any changes to the existing work log fields.
 * Things to note:
     * Empty entries are ignored
-    * Entries that are not json encoded or are missing a created by user will show up as `Admin 1969-12-31 07:00pm` in the comment log.
+    * Entries that are not json encoded or are missing a created by user will be assigned to a system administrator. The header timestamp will look similar to `Admin 1969-12-31 07:00pm` in the comment log.
 
 
 If your instance is on SugarCloud, you can ask for Sugar Support to run the following command:
