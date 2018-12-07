@@ -1,8 +1,9 @@
 Work Log Field
 ============
 
-This is a module loadable field type for use with Sugar 7. The key features of this field type is that worklog entries will be adjusted by the current users display preferences for user names, timezones, and date formats.
+This is a module loadable field type for use with Sugar 7+. The key features of this field type is that worklog entries will be adjusted by the current users display preferences for user names, timezones, and date formats.
 This field was created as a replacement for the original worklog field by Jon Whitcraft ( http://h2ik.co/2012/02/sugarfield-worklog-v1-0-released/ ) as it is not currently being adapted from 6.x.
+
 # Usage
 This repo is the source for a module loadable package that can be installed to Sugar through the module loader. Once installed, Administrators can navigate to Admin / Studio / {module} / Fields and create a new database field with the type of 'Worklog'.
 
@@ -22,7 +23,7 @@ This repo is the source for a module loadable package that can be installed to S
 ?>
 ```
 
-* To implement report filtering, you will need to make a core file change in modules/Reports/templates/templates_modules_def_js.php at line 486 by adding  `filter_defs['worklog'] = qualifiers;`.
+* To implement report filtering, you will need to make a core file change in ./modules/Reports/templates/templates_modules_def_js.php at line 486 by adding  `filter_defs['worklog'] = qualifiers;`.
 * This field is not supported in workflow.
 * This field does not currently support being sent in a stock email template.
 * If you need to decode the history json for a customization, you can do:
@@ -35,18 +36,38 @@ This repo is the source for a module loadable package that can be installed to S
 ?>
 ```
 
+# Migrating
+As of Sugar 8.3, you may want to migrate to the comment log field. To do so, you can use the `worklog:migrate` command in the CLI framework.
+
+```
+php bin/sugarcrm worklog:migrate <module> <work log field>
+```
+
+* This command can not be resumed. It is highly recommend to run the command on a backup of your instance and migrate the `commentlog` and `commentlog_rel` tables to your production instance. If you are running this on production, you should backup your database first.
+* This command will directly populate the `commentlog` and `commentlog_rel` tables. It will not make any changes to the existing work log fields.
+* Things to note:
+    * Empty entries are ignored
+    * Entries that are not json encoded or are missing a created by user will be assigned to a system administrator. The header timestamp will look similar to `Admin 1969-12-31 07:00pm` in the comment log.
+
+
+If your instance is on SugarCloud, you can ask for Sugar Support to run the following command:
+
+```
+shadowy bin/sugarcrm worklog:migrate <module> <work log field>
+```
+
 To Do
 ============
 - Implement mobile layouts
 
-#Building Installer Package
+# Building Installer Package
 To build the installer package, you will need to download the contents on this repository and execute:
 ```
 php build.php
 ```
 Once completed, the installer .zip package will be located under `./builds/`.
     
-#Contributing
+# Contributing
 Everyone is welcome to be involved by creating or improving functionality. If you would like to contribute, please make sure to review the [CONTRIBUTOR TERMS](CONTRIBUTOR TERMS.pdf). When you update this [README](README.md), please check out the [contribution guidelines](CONTRIBUTING.md) for helpful hints and tips that will make it easier to accept your pull request.
 
 ## Contributors
