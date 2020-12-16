@@ -4,6 +4,7 @@
      */
     fieldTag: 'textarea',
     displayValue: '',
+    disableDecoration: true,
 
     /**
      * Default settings used when none are supplied through metadata.
